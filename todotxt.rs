@@ -4,11 +4,14 @@ struct Todo {
         id: int,
         todo: ~str,
         priority: char,
-        raw_todo: ~str
+        raw_todo: ~str,
+        contexts: & 'static [~str],
+        projects: & 'static [~str]
 }
 
 fn create_task(todo: ~str, id: int) -> Todo {
-        let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"", priority: '^'};
+        let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"", priority: '^',
+                                contexts: &[], projects: &[]};
 
         task.todo = todo.clone();
 
