@@ -2,7 +2,11 @@
 
 struct Todo {
         id: int,
-        todo: str,
+        todo: ~str,
         priority: int,
-        raw_todo: str
+        raw_todo: ~str
+}
+
+fn main () {
+
 }
