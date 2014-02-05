@@ -8,9 +8,9 @@ struct Todo {
 }
 
 fn create_task(todo: ~str, id: int) -> Todo {
-        let task = Todo{id: id, raw_todo: todo, todo: ~"", priority: '^'};
+        let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"", priority: '^'};
 
-        task.todo = todo;
+        task.todo = todo.clone();
 
         return task;
 }
