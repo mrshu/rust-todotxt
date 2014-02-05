@@ -13,6 +13,9 @@ fn create_task(todo: ~str, id: int) -> Todo {
         let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"", priority: '^',
                                 contexts: &[], projects: &[]};
 
+        if (todo[0] == "x".as_bytes()[0]) {
+                println("finished");
+        }
         task.todo = todo.clone();
 
         return task;
@@ -21,4 +24,5 @@ fn create_task(todo: ~str, id: int) -> Todo {
 fn main () {
 
         let t = create_task(~"some important task", 1);
+        let x = create_task(~"x some important task", 1);
 }
