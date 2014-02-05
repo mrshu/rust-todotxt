@@ -23,6 +23,12 @@ fn create_task(todo: ~str, id: int) -> Todo {
         return task;
 }
 
+impl Todo {
+        fn to_str(&self) -> ~str {
+                return format!("{:d} ({:c}) '{:s}'", self.id, self.priority, self.todo)
+        }
+}
+
 fn main () {
 
         let t = create_task(~"some important task", 1);
