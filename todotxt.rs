@@ -1,6 +1,5 @@
 
-
-struct Todo {
+pub struct Todo {
         id: int,
         todo: ~str,
         priority: char,
@@ -13,13 +12,13 @@ struct Todo {
 
 
 impl Todo {
-        fn to_str(&self) -> ~str {
+        pub fn to_str(&self) -> ~str {
                 return format!("{:d} {:b} ({:c}) '{:s}' \"{:s}\"",
                                 self.id, self.finished, self.priority,
                                 self.todo, self.raw_todo)
         }
 
-        fn create(todo: ~str, id: int) -> Todo {
+        pub fn create(todo: ~str, id: int) -> Todo {
                 let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"",
                                         finished: false, priority: '^',
                                         contexts: &[], projects: &[]};
