@@ -23,7 +23,7 @@ impl Todo {
                                         finished: false, priority: '^',
                                         contexts: &[], projects: &[]};
 
-                if (todo[0] == "x".as_bytes()[0]) {
+                if (todo.slice(0, 2) == "x ") {
                         task.finished = true;
                         task.todo = todo.slice(2, todo.len()).to_owned()
                 }
