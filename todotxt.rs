@@ -45,6 +45,13 @@ fn simple_todo_create_test() {
         assert!(t.raw_todo == ~"some important task");
 }
 
+#[test]
+fn todo_to_str_test() {
+        let t = Todo::create(~"some important task", 1);
+
+        assert!(t.to_str() == ~"1 false (^) 'some important task' \"some important task\"")
+}
+
 fn main () {
 
         let t = Todo::create(~"some important task", 1);
