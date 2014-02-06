@@ -19,15 +19,14 @@ impl Todo {
         }
 
         pub fn create(todo: ~str, id: int) -> Todo {
-                let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"",
+                let mut task = Todo{id: id, raw_todo: todo.clone(), todo: todo.clone(),
                                         finished: false, priority: '^',
                                         contexts: &[], projects: &[]};
 
                 if (todo[0] == "x".as_bytes()[0]) {
                         task.finished = true;
+                        task.todo = todo.slice(2, todo.len()).to_owned()
                 }
-
-                task.todo = todo.clone();
 
                 return task;
         }
@@ -48,5 +47,8 @@ fn simple_todo_create_test() {
 fn todo_to_str_test() {
         let t = Todo::create(~"some important task", 1);
 
-        assert!(t.to_str() == ~"1 false (^) 'some important task' \"some important task\"")
+        assert_eq!(t.to_str(), ~"1 false (^) 'some important task' \"some important task\"")
+
+        let x = Todo::create(~"x some important task", 1);
+        assert_eq!(x.to_str(), ~"1 true (^) 'some important task' \"x some important task\"")
 }
