@@ -34,6 +34,14 @@ impl Todo {
         }
 }
 
+#[test]
+fn simple_todo_create_test() {
+        let t = Todo::create(~"some important task", 1);
+        assert!(t.id == 1);
+        assert!(t.priority == '^');
+        assert!(t.finished == false);
+}
+
 fn main () {
 
         let t = Todo::create(~"some important task", 1);
