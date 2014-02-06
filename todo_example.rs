@@ -3,8 +3,14 @@ mod todotxt;
 
 fn main () {
 
-        let t = ::todotxt::Todo::create(~"some important task", 1);
+        let mut tasks = ~[];
+
+        let t = ::todotxt::Task::create(~"some important task", 1);
         println(t.to_str());
-        let x = ::todotxt::Todo::create(~"x some important task", 1);
+
+        tasks.push(t);
+        let x = ::todotxt::Task::create(~"x some important task", 1);
         println(x.to_str());
+
+        tasks.push(x);
 }
