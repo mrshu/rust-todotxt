@@ -13,4 +13,9 @@ fn main () {
         println(x.to_str());
 
         tasks.push(x);
+
+        println!("tasks length: {}", tasks.len());
+        for task in tasks.iter() {
+                println(task.to_str());
+        }
 }

@@ -1,5 +1,5 @@
 
-pub struct Todo {
+pub struct Task {
         id: int,
         todo: ~str,
         priority: char,
@@ -10,16 +10,15 @@ pub struct Todo {
 }
 
 
-
-impl Todo {
+impl Task {
         pub fn to_str(&self) -> ~str {
                 return format!("{:d} {:b} ({:c}) '{:s}' \"{:s}\"",
                                 self.id, self.finished, self.priority,
                                 self.todo, self.raw_todo)
         }
 
-        pub fn create(todo: ~str, id: int) -> Todo {
-                let mut task = Todo{id: id, raw_todo: todo.clone(), todo: todo.clone(),
+        pub fn create(todo: ~str, id: int) -> Task {
+                let mut task = Task{id: id, raw_todo: todo.clone(), todo: todo.clone(),
                                         finished: false, priority: '^',
                                         contexts: &[], projects: &[]};
 
@@ -34,7 +33,7 @@ impl Todo {
 
 #[test]
 fn simple_todo_create_test() {
-        let t = Todo::create(~"some important task", 1);
+        let t = Task::create(~"some important task", 1);
 
         assert!(t.id == 1);
         assert!(t.priority == '^');
@@ -45,10 +44,10 @@ fn simple_todo_create_test() {
 
 #[test]
 fn todo_to_str_test() {
-        let t = Todo::create(~"some important task", 1);
+        let t = Task::create(~"some important task", 1);
 
         assert_eq!(t.to_str(), ~"1 false (^) 'some important task' \"some important task\"")
 
-        let x = Todo::create(~"x some important task", 1);
+        let x = Task::create(~"x some important task", 1);
         assert_eq!(x.to_str(), ~"1 true (^) 'some important task' \"x some important task\"")
 }
