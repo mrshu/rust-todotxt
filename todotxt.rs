@@ -20,8 +20,8 @@ impl Todo {
         }
 
         fn create(todo: ~str, id: int) -> Todo {
-                let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"", 
-                                        finished: false, priority: '^', 
+                let mut task = Todo{id: id, raw_todo: todo.clone(), todo: ~"",
+                                        finished: false, priority: '^',
                                         contexts: &[], projects: &[]};
 
                 if (todo[0] == "x".as_bytes()[0]) {
@@ -37,9 +37,12 @@ impl Todo {
 #[test]
 fn simple_todo_create_test() {
         let t = Todo::create(~"some important task", 1);
+
         assert!(t.id == 1);
         assert!(t.priority == '^');
         assert!(t.finished == false);
+        assert!(t.todo == ~"some important task");
+        assert!(t.raw_todo == ~"some important task");
 }
 
 fn main () {
