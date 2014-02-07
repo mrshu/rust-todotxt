@@ -29,7 +29,14 @@ impl Task {
                         todo = todo.slice(2, todo.len()).to_owned();
                 }
 
-                //if (todo[0])
+                let chars = todo.chars().to_owned_vec();
+                if (chars[0] == '(' && chars[2] == ')' &&
+                    chars[1].is_uppercase() && chars[3] == ' ') {
+
+                        task.priority = chars[1];
+                        todo = todo.slice(4, todo.len()).to_owned();
+                }
+
                 task.todo = todo;
 
                 return task;
@@ -52,7 +59,7 @@ fn simple_todo_with_priority_test() {
         let t = Task::create(~"(A) some important task with priority", 1);
 
         assert_eq!(t.id , 1);
-        assert_eq!(t.priority , '^');
+        assert_eq!(t.priority , 'A');
         assert_eq!(t.finished , false);
         assert_eq!(t.todo , ~"some important task with priority");
         assert_eq!(t.raw_todo , ~"(A) some important task with priority");
