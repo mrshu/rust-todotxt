@@ -22,10 +22,15 @@ impl Task {
                                         finished: false, priority: '^',
                                         contexts: &[], projects: &[]};
 
-                if (todo.slice(0, 2) == "x ") {
+                let mut t = todo.clone();
+
+                if (t.slice(0, 2) == "x ") {
                         task.finished = true;
-                        task.todo = todo.slice(2, todo.len()).to_owned()
+                        t = t.slice(2, t.len()).to_owned();
                 }
+
+                //if (todo[0])
+                task.todo = t;
 
                 return task;
         }
@@ -35,11 +40,22 @@ impl Task {
 fn simple_todo_create_test() {
         let t = Task::create(~"some important task", 1);
 
-        assert!(t.id == 1);
-        assert!(t.priority == '^');
-        assert!(t.finished == false);
-        assert!(t.todo == ~"some important task");
-        assert!(t.raw_todo == ~"some important task");
+        assert_eq!(t.id , 1);
+        assert_eq!(t.priority , '^');
+        assert_eq!(t.finished , false);
+        assert_eq!(t.todo , ~"some important task");
+        assert_eq!(t.raw_todo , ~"some important task");
+}
+
+#[test]
+fn simple_todo_with_priority_test() {
+        let t = Task::create(~"(A) some important task with priority", 1);
+
+        assert_eq!(t.id , 1);
+        assert_eq!(t.priority , '^');
+        assert_eq!(t.finished , false);
+        assert_eq!(t.todo , ~"some important task with priority");
+        assert_eq!(t.raw_todo , ~"(A) some important task with priority");
 }
 
 #[test]
