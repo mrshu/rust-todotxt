@@ -17,20 +17,20 @@ impl Task {
                                 self.todo, self.raw_todo)
         }
 
-        pub fn create(todo: ~str, id: int) -> Task {
-                let mut task = Task{id: id, raw_todo: todo.clone(), todo: todo.clone(),
+        pub fn create(text: ~str, id: int) -> Task {
+                let mut task = Task{id: id, raw_todo: text.clone(), todo: text.clone(),
                                         finished: false, priority: '^',
                                         contexts: &[], projects: &[]};
 
-                let mut t = todo.clone();
+                let mut todo = text.clone();
 
-                if (t.slice(0, 2) == "x ") {
+                if (todo.slice(0, 2) == "x ") {
                         task.finished = true;
-                        t = t.slice(2, t.len()).to_owned();
+                        todo = todo.slice(2, todo.len()).to_owned();
                 }
 
                 //if (todo[0])
-                task.todo = t;
+                task.todo = todo;
 
                 return task;
         }
