@@ -63,6 +63,17 @@ fn simple_todo_with_priority_test() {
         assert_eq!(t.finished , false);
         assert_eq!(t.todo , ~"some important task with priority");
         assert_eq!(t.raw_todo , ~"(A) some important task with priority");
+
+        let ts = Task::create(~"(a) some important task with priority", 1);
+
+        assert_eq!(ts.id , 1);
+        assert_eq!(ts.priority , '^');
+        assert_eq!(ts.finished , false);
+        assert_eq!(ts.todo , ~"(a) some important task with priority");
+        assert_eq!(ts.raw_todo , ~"(a) some important task with priority");
+
+
+
 }
 
 #[test]
