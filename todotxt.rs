@@ -33,6 +33,14 @@ impl Task {
                 }
 
                 let mut chars = todo.chars().to_owned_vec();
+
+                chars = todo.chars().to_owned_vec();
+                if (chars[10] == ' ' && chars[4] == '-' && chars[7] == '-') {
+                        task.finish_date = todo.slice(0, 10).to_owned();
+                        todo = todo.slice(11, todo.len()).to_owned();
+                }
+
+                chars = todo.chars().to_owned_vec();
                 if (chars[0] == '(' && chars[2] == ')' &&
                     chars[1].is_uppercase() && chars[3] == ' ') {
 
@@ -41,7 +49,6 @@ impl Task {
                 }
 
                 chars = todo.chars().to_owned_vec();
-
                 if (chars[10] == ' ' && chars[4] == '-' && chars[7] == '-') {
                         task.create_date = todo.slice(0, 10).to_owned();
                         todo = todo.slice(11, todo.len()).to_owned();
