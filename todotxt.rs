@@ -75,9 +75,10 @@ impl Tasks {
                 self.list.push(task);
         }
 
-      //pub fn add_task_from_string(&mut self, text: ~str) {
-      //        self.list.push(Task::create(text, self.list.len() as int));
-      //}
+        pub fn add_task_from_string(&mut self, text: ~str) {
+                let id = self.len();
+                self.list.push(Task::create(text, id));
+        }
 
         pub fn len(&self) -> int {
                 return self.list.len() as int;
