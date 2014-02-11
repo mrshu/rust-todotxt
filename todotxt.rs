@@ -5,8 +5,8 @@ pub struct Task {
         priority: char,
         finished: bool,
         raw_todo: ~str,
-        create_date ~str,
-        finish_date ~str,
+        create_date: ~str,
+        finish_date: ~str,
         contexts: & 'static [~str],
         projects: & 'static [~str]
 }
@@ -22,6 +22,7 @@ impl Task {
         pub fn create(text: ~str, id: int) -> Task {
                 let mut task = Task{id: id, raw_todo: text.clone(), todo: text.clone(),
                                         finished: false, priority: '^',
+                                        create_date: ~"", finish_date: ~"",
                                         contexts: &[], projects: &[]};
 
                 let mut todo = text.clone();
@@ -81,8 +82,17 @@ fn simple_todo_with_priority_test() {
         assert_eq!(ts.todo , ~"(a) some important task with priority");
         assert_eq!(ts.raw_todo , ~"(a) some important task with priority");
 
+}
 
+#[test]
+fn simple_todo_with_date_test() {
+        let t = Task::create(~"(A) 2014-03-02 some important task with priority", 1);
 
+        assert_eq!(t.id , 1);
+        assert_eq!(t.priority , 'A');
+        assert_eq!(t.finished , false);
+        assert_eq!(t.todo , ~"some important task with priority");
+        assert_eq!(t.raw_todo , ~"(A) 2014-03-02 some important task with priority");
 }
 
 #[test]
