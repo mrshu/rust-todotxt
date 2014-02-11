@@ -5,6 +5,8 @@ pub struct Task {
         priority: char,
         finished: bool,
         raw_todo: ~str,
+        create_date ~str,
+        finish_date ~str,
         contexts: & 'static [~str],
         projects: & 'static [~str]
 }
@@ -29,12 +31,19 @@ impl Task {
                         todo = todo.slice(2, todo.len()).to_owned();
                 }
 
-                let chars = todo.chars().to_owned_vec();
+                let mut chars = todo.chars().to_owned_vec();
                 if (chars[0] == '(' && chars[2] == ')' &&
                     chars[1].is_uppercase() && chars[3] == ' ') {
 
                         task.priority = chars[1];
                         todo = todo.slice(4, todo.len()).to_owned();
+                }
+
+                chars = todo.chars().to_owned_vec();
+
+                if (chars[10] == ' ' && chars[4] == '-' && chars[7] == '-') {
+                        task.create_date = todo.slice(0, 10).to_owned();
+                        todo = todo.slice(11, todo.len()).to_owned();
                 }
 
                 task.todo = todo;
