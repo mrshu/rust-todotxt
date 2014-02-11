@@ -60,7 +60,21 @@ impl Task {
         }
 }
 
-type Tasks =  ~[Task];
+pub struct Tasks {
+        list: ~[Task]
+}
+
+impl Tasks {
+        pub fn create() -> Tasks {
+                let tasks = Tasks{list: ~[]};
+
+                return tasks;
+        }
+
+        pub fn add(&mut self, task: Task) {
+                self.list.push(task);
+        }
+}
 
 #[test]
 fn simple_todo_create_test() {
