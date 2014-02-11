@@ -11,7 +11,6 @@ pub struct Task {
         projects: & 'static [~str]
 }
 
-
 impl Task {
         pub fn to_str(&self) -> ~str {
                 return format!("{:d} {:b} ({:c}) |{:s}| '{:s}' \"{:s}\"",
@@ -60,6 +59,8 @@ impl Task {
                 return task;
         }
 }
+
+type Tasks =  ~[Task];
 
 #[test]
 fn simple_todo_create_test() {
