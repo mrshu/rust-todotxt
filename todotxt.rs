@@ -126,6 +126,17 @@ fn simple_todo_with_date_test() {
         assert_eq!(t.todo , ~"some important task with priority");
         assert_eq!(t.raw_todo , ~"(A) 2014-03-02 some important task with priority");
         assert_eq!(t.create_date, ~"2014-03-02");
+
+        let ft = Task::create(~"x 2014-03-03 (A) 2014-03-02 some finished important task", 1);
+
+        assert_eq!(ft.id , 1);
+        assert_eq!(ft.priority , 'A');
+        assert_eq!(ft.finished , true);
+        assert_eq!(ft.todo , ~"some finished important task");
+        assert_eq!(ft.raw_todo , ~"x 2014-03-03 (A) 2014-03-02 some finished important task");
+        assert_eq!(ft.create_date, ~"2014-03-02");
+        assert_eq!(ft.finish_date, ~"2014-03-03");
+
 }
 
 #[test]
