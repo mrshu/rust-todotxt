@@ -13,8 +13,8 @@ pub struct Task {
 
 impl Task {
         pub fn to_str(&self) -> ~str {
-                return format!("{:d} {:b} ({:c}) |{:s}| '{:s}' \"{:s}\"",
-                                self.id, self.finished, self.priority,
+                return format!("{:d} {:b} |{:s}| ({:c}) |{:s}| '{:s}' \"{:s}\"",
+                                self.id, self.finished, self.finish_date, self.priority,
                                 self.create_date, self.todo, self.raw_todo)
         }
 
@@ -143,8 +143,8 @@ fn simple_todo_with_date_test() {
 fn todo_to_str_test() {
         let t = Task::create(~"some important task", 1);
 
-        assert_eq!(t.to_str(), ~"1 false (^) || 'some important task' \"some important task\"")
+        assert_eq!(t.to_str(), ~"1 false || (^) || 'some important task' \"some important task\"")
 
         let x = Task::create(~"x some important task", 1);
-        assert_eq!(x.to_str(), ~"1 true (^) || 'some important task' \"x some important task\"")
+        assert_eq!(x.to_str(), ~"1 true || (^) || 'some important task' \"x some important task\"")
 }
