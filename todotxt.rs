@@ -7,8 +7,8 @@ pub struct Task {
         raw_todo: ~str,
         create_date: ~str,
         finish_date: ~str,
-        contexts: & 'static [~str],
-        projects: & 'static [~str]
+        contexts: ~[~str],
+        projects: ~[~str]
 }
 
 impl Task {
@@ -22,7 +22,7 @@ impl Task {
                 let mut task = Task{id: id, raw_todo: text.clone(), todo: text.clone(),
                                         finished: false, priority: '^',
                                         create_date: ~"", finish_date: ~"",
-                                        contexts: &[], projects: &[]};
+                                        contexts: ~[], projects: ~[]};
 
                 let mut todo = text.clone();
 
@@ -33,7 +33,6 @@ impl Task {
 
                 let mut chars = todo.chars().to_owned_vec();
 
-                chars = todo.chars().to_owned_vec();
                 if (chars[10] == ' ' && chars[4] == '-' &&
                     chars[7] == '-' && task.finished) {
                         task.finish_date = todo.slice(0, 10).to_owned();
