@@ -53,6 +53,12 @@ impl Task {
                         todo = todo.slice(11, todo.len()).to_owned();
                 }
 
+                for item in todo.split(' ') {
+                        if (item[0] == '@' as u8) {
+                                task.contexts.push(item.to_owned());
+                        }
+                }
+
                 task.todo = todo;
 
                 return task;
@@ -113,6 +119,19 @@ fn simple_todo_with_priority_test() {
         assert_eq!(ts.todo , ~"(a) some important task with priority");
         assert_eq!(ts.raw_todo , ~"(a) some important task with priority");
 
+}
+
+#[test]
+fn simple_todo_with_context_test() {
+        let t = Task::create(~"(A) some @important task with priority", 1);
+
+        assert_eq!(t.id , 1);
+        assert_eq!(t.priority , 'A');
+        assert_eq!(t.finished , false);
+        assert_eq!(t.todo , ~"some @important task with priority");
+        assert_eq!(t.raw_todo , ~"(A) some @important task with priority");
+
+        assert_eq!(t.contexts, ~[~"@important"]);
 }
 
 #[test]
