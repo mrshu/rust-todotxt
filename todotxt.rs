@@ -57,6 +57,10 @@ impl Task {
                         if (item[0] == '@' as u8) {
                                 task.contexts.push(item.to_owned());
                         }
+
+                        if (item[0] == '+' as u8) {
+                                task.projects.push(item.to_owned());
+                        }
                 }
 
                 task.todo = todo;
@@ -132,6 +136,20 @@ fn simple_todo_with_context_test() {
         assert_eq!(t.raw_todo , ~"(A) some @important task with priority");
 
         assert_eq!(t.contexts, ~[~"@important"]);
+}
+
+#[test]
+fn simple_todo_with_context_and_project_test() {
+        let t = Task::create(~"(A) some @important task regarding +project with priority", 1);
+
+        assert_eq!(t.id , 1);
+        assert_eq!(t.priority , 'A');
+        assert_eq!(t.finished , false);
+        assert_eq!(t.todo , ~"some @important task regarding +project with priority");
+        assert_eq!(t.raw_todo , ~"(A) some @important task regarding +project with priority");
+
+        assert_eq!(t.contexts, ~[~"@important"]);
+        assert_eq!(t.projects, ~[~"+project"]);
 }
 
 #[test]
